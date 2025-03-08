@@ -6,10 +6,10 @@ This is a simple but powerful tool to interactively explore and analyze data. It
 is based on iPython, a more advanced version of the standard Python shell. It
 provides a rich set of features for working with data interactively, including
 tab completion, multi-line editing, and auto-indentation, as well as the ability
-to configure the default editing mode,e.g., Vim-mode. Additionally, it provides
-a `startup` script folder, which allows you to define custom startup scripts to
-initialize the environment, set up the project database, or import local
-libraries as well as public ones. Particularly useful is the ability to
+to configure the default editing mode,e.g., Vim- or Emacs-mode. Additionally, it
+provides a `startup` script folder, which allows you to define custom startup
+scripts to initialize the environment, set up the project database, or import
+local libraries as well as public ones. Particularly useful is the ability to
 automatically reload modules, which is not possible in the standard Python
 shell, so you can develop your application interactively by importing modules
 and functions from your project.
@@ -30,8 +30,8 @@ Consider this `docker-compose.yml` file:
 services:
   isession:
     container_name: isession
-    # This image has uv and iPython installed, so you can use uv as the package
-    # manager
+    # This image is build from the Dockerfile in this repository. It has uv and
+    # iPython (system-wide) installed.
     image: ${DOCKER_REPOSITORY}/isession:1.0.0
     # This command creates a new virtual environment from your project
     # dependencies and makes them available in the iPython shell, so you can
@@ -63,6 +63,12 @@ volumes:
   isession_data:
   ```
 
+  If so desired, you could also mount the `ipyton_config.py` file into the
+  container (under `.ipython/default_profile/ipython_config.py`) and adjust the
+  configuration to fit your needs. The `ipython_config.py` is a modified version
+  of the default iPython configuration file. Check out the comments in the file
+  for more information.
+  
 ## Design
 
 The `isession` tool is based on the `uv` package manager, which is a simple,
